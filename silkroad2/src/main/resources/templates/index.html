@@ -1,13 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="header,footer/header :: head_html">
 </head>
-<body>
-    <h1>hello world</h1>
-    <a href="/questions">
-hi
-    </a>
+<body >
+<div th:replace="header,footer/header :: header"></div>
+
+<h1>oh ya 3alam </h1>
 </body>
 </html>
