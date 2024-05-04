@@ -10,4 +10,6 @@ public interface PersonneRepository extends JpaRepository<Personne,Integer> {
     Personne findById(Long id);
     void deleteById(Long id);
 
+    Personne findByNom(String nom);
+
 }
