@@ -5,30 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="789c1bed-682f-4a10-8e7d-d1e5f5440891" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/silkroad2/src/main/java/config/CorsConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/css/footer.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/css/header.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/img/1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/header,footer/header.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/question.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/Question/delete_question.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/Question/edit_question.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/Question/footer.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/reponse/edit_reponse.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/reponse/reponse.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/reponse/reponse.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/test.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/AddQuestion.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/silkroad2/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/controller/QuestionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/controller/QuestionController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/controller/ReponseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/controller/ReponseController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/repository/PersonneRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/repository/PersonneRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/entities/Tags.java" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/entities/Tags.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/silkroad2/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/silkroad2/src/main/resources/css/footer.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/silkroad2/src/main/resources/css/header.css" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/css/header.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/header,footer/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/header,footer/header.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/question.html" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/Question/question.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
   </component>
   <component name="CompilerWorkspaceConfiguration">
     <option name="MAKE_PROJECT_ON_SAVE" value="true" />
@@ -43,6 +44,13 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
+  </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/Silkroad2Application.java" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -51,6 +59,9 @@
   </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="QODANA_PROBLEMS_VIEW_TAB" />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="2" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
@@ -86,11 +97,11 @@
       <recent name="C:\silkroadproject\silkroad2\src\main\java\com\iset\silkroad2" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\silkroadproject\silkroad2\src\main\resources\templates\Question" />
       <recent name="C:\silkroadproject\silkroad2\src\main\resources\templates" />
       <recent name="C:\silkroadproject\silkroad2\src\main\resources\templates\header,footer" />
       <recent name="C:\silkroadproject\silkroad2\src\main\resources" />
       <recent name="C:\silkroadproject\silkroad2\src\main\resources\static\imga\css\img" />
-      <recent name="C:\silkroadproject\silkroad2\src\main\resources\static\imga\css" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.iset.silkroad2.entity" />
@@ -137,9 +148,19 @@
       <option name="presentableId" value="Default" />
       <updated>1713869428829</updated>
     </task>
+    <task id="LOCAL-00001" summary="i did the header and the footer('who can fix the header and the footer so i can call them in the other file &lt;th:fragment and th:replace won't work &gt;')">
+      <created>1714817275092</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1714817275092</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="i did the header and the footer('who can fix the header and the footer so i can call them in the other file &lt;th:fragment and th:replace won't work &gt;')" />
+    <option name="LAST_COMMIT_MESSAGE" value="i did the header and the footer('who can fix the header and the footer so i can call them in the other file &lt;th:fragment and th:replace won't work &gt;')" />
   </component>
 </project>

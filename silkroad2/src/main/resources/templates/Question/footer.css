@@ -1,0 +1,177 @@
+
+.container-fluid{
+   margin: 50px 20px 20px 20px;
+}
+.title1{
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+#question_title{
+    width :100%;
+
+}
+
+.title1 label,
+.title1 input,
+.title1 p {
+    margin-bottom: 10px; /* Set the desired margin between lines */
+}
+
+.textarea1{
+      box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+      margin-bottom: 20px;
+      padding: 20px;
+}
+
+.textarea1 label,
+.textarea1 input,
+.textarea1 p,
+.tag1{
+    margin-bottom: 10px; /* Set the desired margin between lines */
+}
+
+.tag1{
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+.bn632-hover {
+    width: 160px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    margin: 20px;
+    height: 55px;
+    text-align:center;
+    border: none;
+    background-size: 300% 100%;
+    border-radius: 50px;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+  }
+
+  .bn632-hover:hover {
+    background-position: 100% 0;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+  }
+
+  .bn632-hover:focus {
+    outline: none;
+  }
+
+  .bn632-hover.bn26 {
+    background-image: linear-gradient(
+      to right,
+      #25aae1,
+      #4481eb,
+      #04befe,
+      #3f86ed
+    );
+    box-shadow: 0 4px 15px 0 rgba(65, 132, 234, 0.75);
+  }
+
+
+  .bn632-hover {
+    width: 160px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    margin: 20px;
+    height: 55px;
+    text-align:center;
+    border: none;
+    background-size: 300% 100%;
+    border-radius: 50px;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+  }
+
+  .bn632-hover:hover {
+    background-position: 100% 0;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+  }
+
+  .bn632-hover:focus {
+    outline: none;
+  }
+
+  .bn632-hover.bn21 {
+    background-image: linear-gradient(
+      to right,
+      #fc6076,
+      #ff9a44,
+      #ef9d43,
+      #e75516
+    );
+    box-shadow: 0 4px 15px 0 rgba(252, 104, 110, 0.75);
+  }
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+  /* half 2*/
+
+.question-box{
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
+    max-width: 100%;
+    margin-top: 30px;
+    padding-left: 10px;
+}
+.mini-question{
+    overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 100%;
+
+}
+
+.mini-question {
+    margin-bottom: 5px; /* Adjust the distance between questions */
+    border-bottom: solid gray;
+}
+
+.mini-question a {
+    text-decoration: none;
+    color: blue;
+    position: relative;
+
+    transition: box-shadow 0.3s ease; /* Add smooth transition effect */
+
+    /* Initial style without glow */
+    box-shadow: none;
+}
+
+.mini-question a:hover {
+    /* Add a glowing effect on hover */
+    text-shadow: 0 0 5px orange, 0 0 10px orange, 0 0 15px orange;
+}
+
+.error {
+  background-color: #ffcccc; /* or any other shade of red */
+}
+
+@media (max-width: 768px) {
+
+  .bg-light{
+    display: none;
+  }
+}

@@ -1,10 +1,11 @@
 package com.iset.silkroad2.controller;
 
+
 import com.iset.silkroad2.entities.Personne;
 import com.iset.silkroad2.entities.Question;
+import com.iset.silkroad2.entities.Tags;
 import com.iset.silkroad2.repository.PersonneRepository;
 import com.iset.silkroad2.repository.QuestionRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -31,14 +32,29 @@ public class QuestionController {
     PersonneRepository personneRepository; // Corrected the variable name
 
     @GetMapping("/ask")
-    public String showAskQuestionForm(Model model) {
+    public String showAskQuestionForm(Model model, @RequestParam(name = "tag", required = false, defaultValue = "Restorant") Tags tag) {
         model.addAttribute("question", new Question());
-        return "question";
+        model.addAttribute("tags", Tags.values()); // Add the Tags enum values to the model
+
+//        model.addAttribute("tags", Tags.values()); // Add the Tags enum values to the model
+        return "Question/question";
+    }
+    @GetMapping("/question/{id}/edit")
+    public String showEditQuestionForm(@PathVariable Long id, Model model) {
+        Question question = questionRepository.findById(id);
+
+        model.addAttribute("question", question);
+        model.addAttribute("tags", Tags.values());
+        return "Question/edit_question";
+    }
+        @GetMapping("/all")
+    public List<Question> getAllQuestions(){
+        return questionRepository.findAll();
     }
 
     @GetMapping("/index")
     public String showIndex(){
-        return "header,footer/index";
+        return "header,footer/header";
     }
 
 
@@ -60,8 +76,9 @@ public class QuestionController {
 
     @PostMapping("/hi")
     public String addQuestionn(@ModelAttribute("question") Question question) {
+        question.setCreatedatQ(new Date());
         questionRepository.save(question);
-        return "redirect:/index"; // Redirect to the home page after adding the question
+        return "redirect:/question/index"; // Redirect to the home page after adding the question
     }
 
 
@@ -84,10 +101,7 @@ public class QuestionController {
 
 
 
-    @GetMapping("")
-    public List<Question> getAllQuestions() {
-        return questionRepository.findAll();
-    }
+
 
 
     @GetMapping("/{id}")
@@ -103,12 +117,33 @@ public class QuestionController {
         questionRepository.deleteById(id);
     }
     @PutMapping("/modifier/{id}")
-    public Question modiferquestion(@RequestBody Question question , @PathVariable Long id ){
+    public String modiferquestion(@PathVariable Long id, @ModelAttribute("question") Question question) {
         Question question1 = questionRepository.findById(id);
-        question1.setTitreq(question.getTitreq());
-        question1.setContenuq(question.getContenuq());
-        return questionRepository.save(question1);
+        if (question1 != null) {
+            question1.setTitreq(question.getTitreq());
+            question1.setContenuq(question.getContenuq());
+            questionRepository.save(question1);
+            return "redirect:/question/index";
+        } else {
+            // Handle the case where the question with the given ID is not found
+            return "redirect:/error";
+        }
     }
+
+    @PutMapping("/modify/{id}")
+    public ResponseEntity<Question> modifyQuestion(@RequestBody Question question, @PathVariable Long id) {
+        Optional<Question> optionalQuestion = Optional.ofNullable(questionRepository.findById(id));
+        if (optionalQuestion.isPresent()) {
+            Question existingQuestion = optionalQuestion.get();
+            existingQuestion.setTitreq(question.getTitreq());
+            existingQuestion.setContenuq(question.getContenuq());
+            Question updatedQuestion = questionRepository.save(existingQuestion);
+            return ResponseEntity.ok(updatedQuestion);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 
 
 
