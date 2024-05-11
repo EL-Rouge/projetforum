@@ -4,24 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="789c1bed-682f-4a10-8e7d-d1e5f5440891" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/Question/delete_question.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/Question/edit_question.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/Question/footer.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/reponse/edit_reponse.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/reponse/reponse.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/reponse/reponse.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/test.html" afterDir="false" />
+    <list default="true" id="789c1bed-682f-4a10-8e7d-d1e5f5440891" name="Changes" comment="i did the header and the footer('who can fix the header and the footer so i can call them in the other file &lt;th:fragment and th:replace won't work &gt;')&#10;and i did the page add question,delete question ,edit question&#10;add answer,delete answer ,adit answer">
+      <change afterPath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/controller/NotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/static/css/home.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/static/js/like/dislike.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/home/home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/silkroad2/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/controller/QuestionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/controller/QuestionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/controller/ReponseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/controller/ReponseController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/entities/Tags.java" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/entities/Tags.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/repository/QuestionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/repository/QuestionRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/repository/ReponseRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/repository/ReponseRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/silkroad2/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/silkroad2/src/main/resources/css/footer.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/silkroad2/src/main/resources/css/header.css" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/css/header.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/header,footer/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/header,footer/header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/question.html" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/Question/question.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/silkroad2/src/main/resources/css/header.css" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/static/css/header.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/silkroad2/src/main/resources/img/1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/static/imgs/1.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/Question/edit_question.html" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/Question/edit_question.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/Question/footer.css" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/static/css/footer.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/Question/question.html" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/Question/question.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/reponse/edit_reponse.html" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/reponse/edit_reponse.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/reponse/reponse.css" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/static/css/reponse.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/reponse/reponse.html" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/reponse/reponse.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,8 +40,8 @@
       <list>
         <option value="Interface" />
         <option value="Enum" />
-        <option value="Class" />
         <option value="HTML File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -85,23 +86,26 @@
     &quot;ToolWindowRun.ShowToolbar&quot;: &quot;false&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/banno/Desktop/GestionBanque-master - Copie bennouri haider&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/banno/Downloads/js-liveEdit-223.8214.16.zip&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;advanced.settings&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;
   }
 }</component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.iset.silkroad2.controller" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\silkroadproject\silkroad2\src\main\java\com\iset\silkroad2" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\silkroadproject\silkroad2\src\main\resources\templates\Question" />
-      <recent name="C:\silkroadproject\silkroad2\src\main\resources\templates" />
-      <recent name="C:\silkroadproject\silkroad2\src\main\resources\templates\header,footer" />
+      <recent name="C:\silkroadproject\silkroad2\src\main\resources\static\imgs" />
+      <recent name="C:\silkroadproject\silkroad2\src\main\resources\static\" />
+      <recent name="C:\silkroadproject\silkroad2\src\main\resources\static" />
+      <recent name="C:\silkroadproject\silkroad2\src\main\resources\css" />
       <recent name="C:\silkroadproject\silkroad2\src\main\resources" />
-      <recent name="C:\silkroadproject\silkroad2\src\main\resources\static\imga\css\img" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.iset.silkroad2.entity" />
@@ -113,7 +117,7 @@
     </option>
   </component>
   <component name="RunManager">
-    <configuration name="Silkroad2Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="Silkroad2Application" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.iset.silkroad2.Silkroad2Application" />
       <module name="silkroad2" />
       <extension name="coverage">
@@ -126,11 +130,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.Silkroad2Application" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -161,6 +160,16 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="i did the header and the footer('who can fix the header and the footer so i can call them in the other file &lt;th:fragment and th:replace won't work &gt;')" />
-    <option name="LAST_COMMIT_MESSAGE" value="i did the header and the footer('who can fix the header and the footer so i can call them in the other file &lt;th:fragment and th:replace won't work &gt;')" />
+    <MESSAGE value="i did the header and the footer('who can fix the header and the footer so i can call them in the other file &lt;th:fragment and th:replace won't work &gt;')&#10;and i did the page add question,delete question ,edit question&#10;add answer,delete answer ,adit answer" />
+    <option name="LAST_COMMIT_MESSAGE" value="i did the header and the footer('who can fix the header and the footer so i can call them in the other file &lt;th:fragment and th:replace won't work &gt;')&#10;and i did the page add question,delete question ,edit question&#10;add answer,delete answer ,adit answer" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/silkroadproject$Silkroad2Application.ic" NAME="Silkroad2Application Coverage Results" MODIFIED="1715259569421" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.iset.silkroad2.*</FILTER>
+    </SUITE>
   </component>
 </project>

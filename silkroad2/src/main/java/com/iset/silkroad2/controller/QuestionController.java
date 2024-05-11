@@ -3,10 +3,14 @@ package com.iset.silkroad2.controller;
 
 import com.iset.silkroad2.entities.Personne;
 import com.iset.silkroad2.entities.Question;
+import com.iset.silkroad2.entities.Reponse;
 import com.iset.silkroad2.entities.Tags;
 import com.iset.silkroad2.repository.PersonneRepository;
 import com.iset.silkroad2.repository.QuestionRepository;
+import com.iset.silkroad2.repository.ReponseRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +22,7 @@ import javax.swing.*;
 import java.security.Principal;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -27,24 +32,32 @@ public class QuestionController {
     @Autowired
     QuestionRepository questionRepository;
 
-
+    @Autowired
+    ReponseRepository  reponseRepository; // Corrected the variable name
     @Autowired
     PersonneRepository personneRepository; // Corrected the variable name
 
     @GetMapping("/ask")
     public String showAskQuestionForm(Model model, @RequestParam(name = "tag", required = false, defaultValue = "Restorant") Tags tag) {
+        List<Question> questions = questionRepository.findAll();//
         model.addAttribute("question", new Question());
-        model.addAttribute("tags", Tags.values()); // Add the Tags enum values to the model
+        model.addAttribute("tags", Tags.values());
 
-//        model.addAttribute("tags", Tags.values()); // Add the Tags enum values to the model
+        model.addAttribute("questions", questions);//
+
         return "Question/question";
     }
+
+
     @GetMapping("/question/{id}/edit")
     public String showEditQuestionForm(@PathVariable Long id, Model model) {
         Question question = questionRepository.findById(id);
-
+        List<Question> questions = questionRepository.findAll();//
         model.addAttribute("question", question);
         model.addAttribute("tags", Tags.values());
+
+        model.addAttribute("questions", questions);//
+
         return "Question/edit_question";
     }
         @GetMapping("/all")
@@ -66,36 +79,23 @@ public class QuestionController {
         Personne personne = personneRepository.findByNom(username);
         Long userId = personne.getId();
 
-        // Set the current user's ID and creation date
         question.getPersonne().setId(userId);
         question.setCreatedatQ(new Date());
 
         questionRepository.save(question);
-        return "redirect:/index"; // Redirect to the home page after adding the question
+        return "redirect:/index";
     }
 
     @PostMapping("/hi")
     public String addQuestionn(@ModelAttribute("question") Question question) {
         question.setCreatedatQ(new Date());
         questionRepository.save(question);
-        return "redirect:/question/index"; // Redirect to the home page after adding the question
+        return "redirect:/question/index";
     }
 
 
 
-//    signaler
-    @PostMapping("/signal/{id}")
-    public ResponseEntity<Question> signalerQuestion(@PathVariable Long id) {
-        Optional<Question> optionalQuestion = Optional.ofNullable(questionRepository.findById(id));
-        if (optionalQuestion.isPresent()) {
-            Question question = optionalQuestion.get();
-            question.setReported(true);
-            questionRepository.save(question);
-            return ResponseEntity.ok(question);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
+
 
 
 
@@ -111,11 +111,24 @@ public class QuestionController {
 
 
 
+
+
     @DeleteMapping("/{id}")
     @Transactional
-    public void deleteQuestion(@PathVariable Long id) {
-        questionRepository.deleteById(id);
+    public void deleteQuestion(@PathVariable Long id) throws NotFoundException {
+        Optional<Question> optionalQuestion = Optional.ofNullable(questionRepository.findById(id));
+        if (optionalQuestion.isPresent()) {
+            Question question = optionalQuestion.get();
+            // Delete related responses
+            List<Reponse> responses = reponseRepository.findByQuestion(question);
+            reponseRepository.deleteAll(responses);
+            // Delete the question
+            questionRepository.deleteById(id);
+        } else {
+            throw new NotFoundException("Question not found");
+        }
     }
+
     @PutMapping("/modifier/{id}")
     public String modiferquestion(@PathVariable Long id, @ModelAttribute("question") Question question) {
         Question question1 = questionRepository.findById(id);
@@ -146,7 +159,47 @@ public class QuestionController {
 
 
 
+    @GetMapping("/questions/search")
+    public String searchByTitle(@RequestParam String titreq, Model model) {
+        List<Question> questions = questionRepository.findByTitreqContaining(titreq);
+        model.addAttribute("questions", questions);
+        return "home/home"; // Assuming this is the name of your Thymeleaf template
+    }
+
+
+
+    @GetMapping("/questions")
+    public String list(Model model) {
+        List<Question> questions = questionRepository.findAll(); // Implement this method in your service
+        model.addAttribute("questions", questions);
+        return "home/home";
+    }
+
+
+
+    //    signaler
+    @PostMapping("/signal/{questionId}")
+    public ResponseEntity<?> signalQuestion(@PathVariable Long questionId) {
+        Optional<Question> optionalQuestion = Optional.ofNullable(questionRepository.findById(questionId));
+        if (optionalQuestion.isPresent()) {
+            Question question = optionalQuestion.get();
+            question.setReported(true);
+            questionRepository.save(question);
+            return ResponseEntity.ok(question);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 
 }
+
+
+
+
+
+
+
+
 
 
