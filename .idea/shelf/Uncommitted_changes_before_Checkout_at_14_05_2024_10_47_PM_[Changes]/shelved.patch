@@ -1,0 +1,238 @@
+Index: silkroad2/src/main/java/com/iset/silkroad2/repository/QuestionRepository.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.iset.silkroad2.repository;\r\n\r\nimport com.iset.silkroad2.entities.Question;\r\nimport org.springframework.data.jpa.repository.JpaRepository;\r\nimport org.springframework.data.repository.query.Param;\r\nimport org.springframework.stereotype.Repository;\r\n\r\nimport java.util.List;\r\n\r\n@Repository\r\npublic interface QuestionRepository extends JpaRepository<Question,Integer> {\r\n    Question findById(Long id);\r\n\r\n    void deleteById(Long id);\r\n\r\n    List<Question> findByTitreqContaining(@Param(\"titreq\") String titreq);\r\n\r\n//    List<Question> getQuestions();\r\n\r\n\r\n//    List<Question> getAllQuestions();\r\n\r\n\r\n//    List<Question> searchByTitle(String title);\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/silkroad2/src/main/java/com/iset/silkroad2/repository/QuestionRepository.java b/silkroad2/src/main/java/com/iset/silkroad2/repository/QuestionRepository.java
+--- a/silkroad2/src/main/java/com/iset/silkroad2/repository/QuestionRepository.java	
++++ b/silkroad2/src/main/java/com/iset/silkroad2/repository/QuestionRepository.java	
+@@ -15,6 +15,8 @@
+ 
+     List<Question> findByTitreqContaining(@Param("titreq") String titreq);
+ 
++//    List<Question> findByUser(User user);
++
+ //    List<Question> getQuestions();
+ 
+ 
+Index: silkroad2/src/main/java/com/iset/silkroad2/controller/QuestionController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.iset.silkroad2.controller;\r\n\r\n\r\nimport com.iset.silkroad2.entities.Personne;\r\nimport com.iset.silkroad2.entities.Question;\r\nimport com.iset.silkroad2.entities.Reponse;\r\nimport com.iset.silkroad2.entities.Tags;\r\nimport com.iset.silkroad2.repository.PersonneRepository;\r\nimport com.iset.silkroad2.repository.QuestionRepository;\r\nimport com.iset.silkroad2.repository.ReponseRepository;\r\nimport jakarta.servlet.http.HttpServletRequest;\r\nimport org.springframework.beans.factory.annotation.Autowired;\r\nimport org.springframework.data.crossstore.ChangeSetPersister;\r\nimport org.springframework.http.ResponseEntity;\r\nimport org.springframework.stereotype.Controller;\r\nimport org.springframework.ui.Model;\r\nimport org.springframework.web.bind.annotation.*;\r\nimport jakarta.transaction.Transactional;\r\n\r\n\r\nimport javax.swing.*;\r\nimport java.security.Principal;\r\nimport java.util.Date;\r\nimport java.util.List;\r\nimport java.util.Map;\r\nimport java.util.Optional;\r\n\r\n\r\n@Controller\r\n@RequestMapping(\"/question\")\r\npublic class QuestionController {\r\n    @Autowired\r\n    QuestionRepository questionRepository;\r\n\r\n    @Autowired\r\n    ReponseRepository  reponseRepository; // Corrected the variable name\r\n    @Autowired\r\n    PersonneRepository personneRepository; // Corrected the variable name\r\n\r\n    @GetMapping(\"/ask\")\r\n    public String showAskQuestionForm(Model model, @RequestParam(name = \"tag\", required = false, defaultValue = \"Restorant\") Tags tag) {\r\n        List<Question> questions = questionRepository.findAll();//\r\n        model.addAttribute(\"question\", new Question());\r\n        model.addAttribute(\"tags\", Tags.values());\r\n\r\n        model.addAttribute(\"questions\", questions);//\r\n\r\n        return \"Question/question\";\r\n    }\r\n\r\n\r\n    @GetMapping(\"/question/{id}/edit\")\r\n    public String showEditQuestionForm(@PathVariable Long id, Model model) {\r\n        Question question = questionRepository.findById(id);\r\n        List<Question> questions = questionRepository.findAll();//\r\n        model.addAttribute(\"question\", question);\r\n        model.addAttribute(\"tags\", Tags.values());\r\n\r\n        model.addAttribute(\"questions\", questions);//\r\n\r\n        return \"Question/edit_question\";\r\n    }\r\n        @GetMapping(\"/all\")\r\n    public List<Question> getAllQuestions(){\r\n        return questionRepository.findAll();\r\n    }\r\n\r\n    @GetMapping(\"/index\")\r\n    public String showIndex(){\r\n        return \"header,footer/header\";\r\n    }\r\n\r\n\r\n\r\n    @PostMapping(\"/add\")\r\n    public String addQuestion(@ModelAttribute Question question, Principal principal) {\r\n        // Get the current authenticated user's ID\r\n        String username = principal.getName();\r\n        Personne personne = personneRepository.findByNom(username);\r\n        Long userId = personne.getId();\r\n\r\n        question.getPersonne().setId(userId);\r\n        question.setCreatedatQ(new Date());\r\n\r\n        questionRepository.save(question);\r\n        return \"redirect:/index\";\r\n    }\r\n\r\n    @PostMapping(\"/hi\")\r\n    public String addQuestionn(@ModelAttribute(\"question\") Question question) {\r\n        question.setCreatedatQ(new Date());\r\n        questionRepository.save(question);\r\n        return \"redirect:/question/index\";\r\n    }\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n    @GetMapping(\"/{id}\")\r\n    public Question getQuestionById(@PathVariable Long id) {\r\n        return questionRepository.findById(id);\r\n    }\r\n\r\n\r\n\r\n\r\n\r\n    @DeleteMapping(\"/{id}\")\r\n    @Transactional\r\n    public void deleteQuestion(@PathVariable Long id) throws NotFoundException {\r\n        Optional<Question> optionalQuestion = Optional.ofNullable(questionRepository.findById(id));\r\n        if (optionalQuestion.isPresent()) {\r\n            Question question = optionalQuestion.get();\r\n            // Delete related responses\r\n            List<Reponse> responses = reponseRepository.findByQuestion(question);\r\n            reponseRepository.deleteAll(responses);\r\n            // Delete the question\r\n            questionRepository.deleteById(id);\r\n        } else {\r\n            throw new NotFoundException(\"Question not found\");\r\n        }\r\n    }\r\n\r\n    @PutMapping(\"/modifier/{id}\")\r\n    public String modiferquestion(@PathVariable Long id, @ModelAttribute(\"question\") Question question) {\r\n        Question question1 = questionRepository.findById(id);\r\n        if (question1 != null) {\r\n            question1.setTitreq(question.getTitreq());\r\n            question1.setContenuq(question.getContenuq());\r\n            questionRepository.save(question1);\r\n            return \"redirect:/question/index\";\r\n        } else {\r\n            // Handle the case where the question with the given ID is not found\r\n            return \"redirect:/error\";\r\n        }\r\n    }\r\n\r\n    @PutMapping(\"/modify/{id}\")\r\n    public ResponseEntity<Question> modifyQuestion(@RequestBody Question question, @PathVariable Long id) {\r\n        Optional<Question> optionalQuestion = Optional.ofNullable(questionRepository.findById(id));\r\n        if (optionalQuestion.isPresent()) {\r\n            Question existingQuestion = optionalQuestion.get();\r\n            existingQuestion.setTitreq(question.getTitreq());\r\n            existingQuestion.setContenuq(question.getContenuq());\r\n            Question updatedQuestion = questionRepository.save(existingQuestion);\r\n            return ResponseEntity.ok(updatedQuestion);\r\n        } else {\r\n            return ResponseEntity.notFound().build();\r\n        }\r\n    }\r\n\r\n\r\n\r\n    @GetMapping(\"/questions/search\")\r\n    public String searchByTitle(@RequestParam String titreq, Model model) {\r\n        List<Question> questions = questionRepository.findByTitreqContaining(titreq);\r\n        model.addAttribute(\"questions\", questions);\r\n        return \"home/home\"; // Assuming this is the name of your Thymeleaf template\r\n    }\r\n\r\n\r\n\r\n    @GetMapping(\"/questions\")\r\n    public String list(Model model) {\r\n        List<Question> questions = questionRepository.findAll(); // Implement this method in your service\r\n        model.addAttribute(\"questions\", questions);\r\n        return \"home/home\";\r\n    }\r\n\r\n\r\n\r\n    //    signaler\r\n    @PostMapping(\"/signal/{questionId}\")\r\n    public ResponseEntity<?> signalQuestion(@PathVariable Long questionId) {\r\n        Optional<Question> optionalQuestion = Optional.ofNullable(questionRepository.findById(questionId));\r\n        if (optionalQuestion.isPresent()) {\r\n            Question question = optionalQuestion.get();\r\n            question.setReported(true);\r\n            questionRepository.save(question);\r\n            return ResponseEntity.ok(question);\r\n        } else {\r\n            return ResponseEntity.notFound().build();\r\n        }\r\n    }\r\n\r\n\r\n}\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/silkroad2/src/main/java/com/iset/silkroad2/controller/QuestionController.java b/silkroad2/src/main/java/com/iset/silkroad2/controller/QuestionController.java
+--- a/silkroad2/src/main/java/com/iset/silkroad2/controller/QuestionController.java	
++++ b/silkroad2/src/main/java/com/iset/silkroad2/controller/QuestionController.java	
+@@ -8,21 +8,18 @@
+ import com.iset.silkroad2.repository.PersonneRepository;
+ import com.iset.silkroad2.repository.QuestionRepository;
+ import com.iset.silkroad2.repository.ReponseRepository;
+-import jakarta.servlet.http.HttpServletRequest;
+ import org.springframework.beans.factory.annotation.Autowired;
+-import org.springframework.data.crossstore.ChangeSetPersister;
+ import org.springframework.http.ResponseEntity;
+ import org.springframework.stereotype.Controller;
+ import org.springframework.ui.Model;
+ import org.springframework.web.bind.annotation.*;
+ import jakarta.transaction.Transactional;
++import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+ 
+ 
+-import javax.swing.*;
+ import java.security.Principal;
+ import java.util.Date;
+ import java.util.List;
+-import java.util.Map;
+ import java.util.Optional;
+ 
+ 
+@@ -60,10 +57,10 @@
+ 
+         return "Question/edit_question";
+     }
+-        @GetMapping("/all")
+-    public List<Question> getAllQuestions(){
+-        return questionRepository.findAll();
+-    }
++//        @GetMapping("/all")
++//    public List<Question> getAllQuestions(){
++//        return questionRepository.findAll();
++//    }
+ 
+     @GetMapping("/index")
+     public String showIndex(){
+@@ -115,7 +112,7 @@
+ 
+     @DeleteMapping("/{id}")
+     @Transactional
+-    public void deleteQuestion(@PathVariable Long id) throws NotFoundException {
++    public String deleteQuestion(@PathVariable Long id, RedirectAttributes redirectAttributes) throws NotFoundException {
+         Optional<Question> optionalQuestion = Optional.ofNullable(questionRepository.findById(id));
+         if (optionalQuestion.isPresent()) {
+             Question question = optionalQuestion.get();
+@@ -124,9 +121,11 @@
+             reponseRepository.deleteAll(responses);
+             // Delete the question
+             questionRepository.deleteById(id);
++            redirectAttributes.addFlashAttribute("message", "Question deleted successfully.");
+         } else {
+-            throw new NotFoundException("Question not found");
++            redirectAttributes.addFlashAttribute("error", "Question not found.");
+         }
++        return "redirect:/home";
+     }
+ 
+     @PutMapping("/modifier/{id}")
+@@ -192,6 +191,30 @@
+     }
+ 
+ 
++    @GetMapping("/mypostes")
++    public String getQuestions(Model model) {
++        List<Question> questions = questionRepository.findAll();
++        model.addAttribute("questions", questions);
++        return "Question/postes";
++    }
++
++    //page postes pour admin
++//    @GetMapping
++//    public String myQuestions(Model model, Principal principal) {
++//        User user = userRepository.findByUsername(principal.getName());
++//        List<Question> questions = questionRepository.findByUser(user);
++//        List<Answer> answers = new ArrayList<>();
++//
++//        for (Question question : questions) {
++//            answers.addAll(question.getAnswers());
++//        }
++//
++//        model.addAttribute("questions", questions);
++//        model.addAttribute("answers", answers);
++//
++//        return "question/postes";
++//    }
++
+ }
+ 
+ 
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"789c1bed-682f-4a10-8e7d-d1e5f5440891\" name=\"Changes\" comment=\"i did the header and the footer('who can fix the header and the footer so i can call them in the other file &lt;th:fragment and th:replace won't work &gt;')&#10;and i did the page add question,delete question ,edit question&#10;add answer,delete answer ,adit answer\">\r\n      <change afterPath=\"$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/controller/NotFoundException.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/silkroad2/src/main/resources/static/css/home.css\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/silkroad2/src/main/resources/static/js/like/dislike.js\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/silkroad2/src/main/resources/templates/home/home.html\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/silkroad2/pom.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/silkroad2/pom.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/controller/QuestionController.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/controller/QuestionController.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/repository/QuestionRepository.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/repository/QuestionRepository.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/repository/ReponseRepository.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/repository/ReponseRepository.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/silkroad2/src/main/resources/application.properties\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/silkroad2/src/main/resources/application.properties\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/silkroad2/src/main/resources/css/header.css\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/silkroad2/src/main/resources/static/css/header.css\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/silkroad2/src/main/resources/img/1.jpg\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/silkroad2/src/main/resources/static/imgs/1.jpg\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/silkroad2/src/main/resources/templates/Question/edit_question.html\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/silkroad2/src/main/resources/templates/Question/edit_question.html\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/silkroad2/src/main/resources/templates/Question/footer.css\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/silkroad2/src/main/resources/static/css/footer.css\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/silkroad2/src/main/resources/templates/Question/question.html\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/silkroad2/src/main/resources/templates/Question/question.html\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/silkroad2/src/main/resources/templates/reponse/edit_reponse.html\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/silkroad2/src/main/resources/templates/reponse/edit_reponse.html\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/silkroad2/src/main/resources/templates/reponse/reponse.css\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/silkroad2/src/main/resources/static/css/reponse.css\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/silkroad2/src/main/resources/templates/reponse/reponse.html\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/silkroad2/src/main/resources/templates/reponse/reponse.html\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"CodeStyleSettingsInfer\">\r\n    <option name=\"done\" value=\"true\" />\r\n  </component>\r\n  <component name=\"CompilerWorkspaceConfiguration\">\r\n    <option name=\"MAKE_PROJECT_ON_SAVE\" value=\"true\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Interface\" />\r\n        <option value=\"Enum\" />\r\n        <option value=\"HTML File\" />\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"master\" />\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"HighlightingSettingsPerFile\">\r\n    <setting file=\"file://$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/Silkroad2Application.java\" root0=\"FORCE_HIGHLIGHTING\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProblemsViewState\">\r\n    <option name=\"selectedTabId\" value=\"QODANA_PROBLEMS_VIEW_TAB\" />\r\n  </component>\r\n  <component name=\"ProjectCodeStyleSettingsMigration\">\r\n    <option name=\"version\" value=\"2\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 8\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2fUxOsEcZvxJmhkMk51i6eTwLiR\" />\r\n  <component name=\"ProjectLevelVcsManager\">\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,\r\n    &quot;Application.Silkroad2Application.executor&quot;: &quot;Run&quot;,\r\n    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\r\n    &quot;ToolWindowRun.ShowToolbar&quot;: &quot;false&quot;,\r\n    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,\r\n    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,\r\n    &quot;last_opened_file_path&quot;: &quot;C:/Users/banno/Downloads/js-liveEdit-223.8214.16.zip&quot;,\r\n    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,\r\n    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,\r\n    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CreateClassDialog.RecentsKey\">\r\n      <recent name=\"com.iset.silkroad2.controller\" />\r\n    </key>\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\silkroadproject\\silkroad2\\src\\main\\java\\com\\iset\\silkroad2\" />\r\n    </key>\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\silkroadproject\\silkroad2\\src\\main\\resources\\static\\imgs\" />\r\n      <recent name=\"C:\\silkroadproject\\silkroad2\\src\\main\\resources\\static\\\" />\r\n      <recent name=\"C:\\silkroadproject\\silkroad2\\src\\main\\resources\\static\" />\r\n      <recent name=\"C:\\silkroadproject\\silkroad2\\src\\main\\resources\\css\" />\r\n      <recent name=\"C:\\silkroadproject\\silkroad2\\src\\main\\resources\" />\r\n    </key>\r\n    <key name=\"CopyClassDialog.RECENTS_KEY\">\r\n      <recent name=\"com.iset.silkroad2.entity\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunAnythingCache\">\r\n    <option name=\"myCommands\">\r\n      <command value=\"jpaRepository\" />\r\n    </option>\r\n  </component>\r\n  <component name=\"RunManager\">\r\n    <configuration name=\"Silkroad2Application\" type=\"Application\" factoryName=\"Application\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.iset.silkroad2.Silkroad2Application\" />\r\n      <module name=\"silkroad2\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"com.iset.silkroad2.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n  </component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"jdk-21.0.2-openjdk-21.0.2-4caba194b151-4f524021\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"789c1bed-682f-4a10-8e7d-d1e5f5440891\" name=\"Changes\" comment=\"\" />\r\n      <created>1713869428829</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1713869428829</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"i did the header and the footer('who can fix the header and the footer so i can call them in the other file &lt;th:fragment and th:replace won't work &gt;')\">\r\n      <created>1714817275092</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1714817275092</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"2\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <option name=\"ADD_EXTERNAL_FILES_SILENTLY\" value=\"true\" />\r\n    <MESSAGE value=\"i did the header and the footer('who can fix the header and the footer so i can call them in the other file &lt;th:fragment and th:replace won't work &gt;')\" />\r\n    <MESSAGE value=\"i did the header and the footer('who can fix the header and the footer so i can call them in the other file &lt;th:fragment and th:replace won't work &gt;')&#10;and i did the page add question,delete question ,edit question&#10;add answer,delete answer ,adit answer\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"i did the header and the footer('who can fix the header and the footer so i can call them in the other file &lt;th:fragment and th:replace won't work &gt;')&#10;and i did the page add question,delete question ,edit question&#10;add answer,delete answer ,adit answer\" />\r\n  </component>\r\n  <component name=\"XSLT-Support.FileAssociations.UIState\">\r\n    <expand />\r\n    <select />\r\n  </component>\r\n  <component name=\"com.intellij.coverage.CoverageDataManagerImpl\">\r\n    <SUITE FILE_PATH=\"coverage/silkroadproject$Silkroad2Application.ic\" NAME=\"Silkroad2Application Coverage Results\" MODIFIED=\"1715259569421\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"idea\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"false\">\r\n      <FILTER>com.iset.silkroad2.*</FILTER>\r\n    </SUITE>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -5,24 +5,10 @@
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="789c1bed-682f-4a10-8e7d-d1e5f5440891" name="Changes" comment="i did the header and the footer('who can fix the header and the footer so i can call them in the other file &lt;th:fragment and th:replace won't work &gt;')&#10;and i did the page add question,delete question ,edit question&#10;add answer,delete answer ,adit answer">
+-      <change afterPath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/controller/NotFoundException.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/static/css/home.css" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/static/js/like/dislike.js" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/home/home.html" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/Question/postes.html" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/silkroad2/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/pom.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/controller/QuestionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/controller/QuestionController.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/repository/QuestionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/repository/QuestionRepository.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/repository/ReponseRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/repository/ReponseRepository.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/silkroad2/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/application.properties" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/silkroad2/src/main/resources/css/header.css" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/static/css/header.css" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/silkroad2/src/main/resources/img/1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/static/imgs/1.jpg" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/Question/edit_question.html" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/Question/edit_question.html" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/Question/footer.css" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/static/css/footer.css" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/Question/question.html" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/Question/question.html" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/reponse/edit_reponse.html" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/reponse/edit_reponse.html" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/reponse/reponse.css" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/static/css/reponse.css" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/reponse/reponse.html" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/reponse/reponse.html" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -40,8 +26,8 @@
+       <list>
+         <option value="Interface" />
+         <option value="Enum" />
+-        <option value="HTML File" />
+         <option value="Class" />
++        <option value="HTML File" />
+       </list>
+     </option>
+   </component>
+Index: silkroad2/src/main/resources/templates/Question/postes.html
+===================================================================
+diff --git a/silkroad2/src/main/resources/templates/Question/postes.html b/silkroad2/src/main/resources/templates/Question/postes.html
+new file mode 100644
+--- /dev/null	
++++ b/silkroad2/src/main/resources/templates/Question/postes.html	
+@@ -0,0 +1,64 @@
++<!DOCTYPE html>
++<html lang="en" xmlns:th="http://www.thymeleaf.org">
++
++
++<head>
++    <meta charset="UTF-8">
++
++    <title>Title</title>
++</head>
++<body>
++<div id="carouselExampleControls" class="carousel carousel-dark slide" data-bs-ride="carousel">
++    <div class="carousel-inner">
++        <div th:if="${questions}">
++            <div th:each="question, iterStat : ${questions}">
++                <div th:if="${iterStat.index % 3 == 0}">
++                    <div th:class="'carousel-item ' + (${iterStat.index == 0} ? 'active' : '')">
++                        <div class="card-wrapper container-sm d-flex justify-content-around">
++                        </div>
++                        <div class="card" style="width: 18rem;">
++                            <div class="card-body">
++                                <h5 class="card-title" th:text="${question.title}">Title</h5>
++                                <p class="card-text" th:text="${question.textarea}">Content</p>
++                                <p class="date" th:text="${#dates.format(question.createdatQ, 'yyyy-MM-dd HH:mm:ss')}">Date</p>
++                                <div class="none">
++                                    <p>
++                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-thumbs-up-fill" viewBox="0 0 16 16">
++                                            <path d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a10 10 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733q.086.18.138.363c.077.27.113.567.113.856s-.036.586-.113.856c-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.2 3.2 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.8 4.8 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z"/>
++                                        </svg>
++                                        <span th:text="${question.upvote}">0</span>
++                                    </p>
++                                    <p>
++                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-thumbs-down-fill" viewBox="0 0 16 16">
++                                            <path d="M6.956 14.534c.065.936.952 1.659 1.908 1.42l.261-.065a1.38 1.38 0 0 0 1.012-.965c.22-.816.533-2.512.062-4.51q.205.03.443.051c.713.065 1.669.071 2.516-.211.518-.173.994-.68 1.2-1.272a1.9 1.9 0 0 0-.234-1.734c.058-.118.103-.242.138-.362.077-.27.113-.568.113-.856 0-.29-.036-.586-.113-.857a2 2 0 0 0-.16-.403c.169-.387.107-.82-.003-1.149a3.2 3.2 0 0 0-.488-.9c.054-.153.076-.313.076-.465a1.86 1.86 0 0 0-.253-.912C13.1.757 12.437.28 11.5.28H8c-.605 0-1.07.08-1.466.217a4.8 4.8 0 0 0-.97.485l-.048.029c-.504.308-.999.61-2.068.723C2.682 1.815 2 2.434 2 3.279v4c0 .851.685 1.433 1.357 1.616.849.232 1.574.787 2.132 1.41.56.626.914 1.28 1.039 1.638.199.575.356 1.54.428 2.591"/>
++                                        </svg>
++                                        <span th:text="${question.downvote}">0</span>
++                                    </p>
++                                </div>
++                                <a th:href="@{/questions/edit/{id}(id=${question.id})}" class="btn btn-primary">Edit</a>
++                                <div th:replace="fragments/delete-question :: delete_question"></div>
++                            </div>
++                        </div>
++                        <div th:if="${iterStat.index % 3 == 2 || iterStat.last}">
++                        </div>
++                    </div>
++                </div>
++            </div>
++            <div th:unless="${questions}">
++                <div class="text-center">
++                    <p>No questions yet.</p>
++                </div>
++            </div>
++        </div>
++        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
++            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
++            <span class="visually-hidden">Previous</span>
++        </button>
++        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
++            <span class="carousel-control-next-icon" aria-hidden="true"></span>
++            <span class="visually-hidden">Next</span>
++        </button>
++    </div>
++</div>
++</body>
++</html>
+\ No newline at end of file

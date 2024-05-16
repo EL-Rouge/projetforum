@@ -90,7 +90,7 @@ public class QuestionController {
     public String addQuestionn(@ModelAttribute("question") Question question) {
         question.setCreatedatQ(new Date());
         questionRepository.save(question);
-        return "redirect:/question/index";
+        return "redirect:/question/questions";
     }
 
 
@@ -113,9 +113,25 @@ public class QuestionController {
 
 
 
+//    @DeleteMapping("/{id}")
+//    @Transactional
+//    public void deleteQuestion(@PathVariable Long id) throws NotFoundException {
+//        Optional<Question> optionalQuestion = Optional.ofNullable(questionRepository.findById(id));
+//        if (optionalQuestion.isPresent()) {
+//            Question question = optionalQuestion.get();
+//            // Delete related responses
+//            List<Reponse> responses = reponseRepository.findByQuestion(question);
+//            reponseRepository.deleteAll(responses);
+//            // Delete the question
+//            questionRepository.deleteById(id);
+//        } else {
+//            throw new NotFoundException("Question not found");
+//        }
+//    }
+
     @DeleteMapping("/{id}")
     @Transactional
-    public void deleteQuestion(@PathVariable Long id) throws NotFoundException {
+    public String deleteQuestion(@PathVariable Long id, Model model) {
         Optional<Question> optionalQuestion = Optional.ofNullable(questionRepository.findById(id));
         if (optionalQuestion.isPresent()) {
             Question question = optionalQuestion.get();
@@ -124,8 +140,10 @@ public class QuestionController {
             reponseRepository.deleteAll(responses);
             // Delete the question
             questionRepository.deleteById(id);
+            return "redirect:/question/questions"; // Redirect to home after successful deletion
         } else {
-            throw new NotFoundException("Question not found");
+            model.addAttribute("error", "Question not found");
+            return "error/404"; // Or another appropriate error page
         }
     }
 
@@ -191,6 +209,24 @@ public class QuestionController {
         }
     }
 
+
+    @PutMapping("/{id}/like")
+    public ResponseEntity<Question> likeQuestion(@PathVariable Long id, @RequestBody Map<String, Boolean> payload) {
+        Optional<Question> optionalQuestion = Optional.ofNullable(questionRepository.findById(id));
+        if (!optionalQuestion.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Question question = optionalQuestion.get();
+        if (payload.get("increment")) {
+            question.setJaime(question.getJaime() + 1);
+        } else {
+            question.setDislike(question.getDislike() + 1);
+        }
+
+        questionRepository.save(question);
+        return ResponseEntity.ok(question);
+    }
 
 }
 

@@ -1,0 +1,122 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"789c1bed-682f-4a10-8e7d-d1e5f5440891\" name=\"Changes\" comment=\"\">\r\n      <change afterPath=\"$PROJECT_DIR$/.idea/vcs.xml\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/silkroad2/src/main/java/config/CorsConfig.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/silkroad2/src/main/resources/css/footer.css\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/silkroad2/src/main/resources/css/header.css\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/silkroad2/src/main/resources/img/1.jpg\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/silkroad2/src/main/resources/templates/header,footer/header.html\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/silkroad2/src/main/resources/templates/question.html\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/frontend/package-lock.json\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/frontend/package-lock.json\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/frontend/package.json\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/frontend/package.json\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/frontend/src/App.vue\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/frontend/src/App.vue\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/frontend/src/components/AddQuestion.vue\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/frontend/src/router/index.js\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/frontend/src/router/index.js\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/silkroad2/pom.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/silkroad2/pom.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/controller/QuestionController.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/controller/QuestionController.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/controller/ReponseController.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/controller/ReponseController.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/repository/PersonneRepository.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/repository/PersonneRepository.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/silkroad2/src/main/resources/application.properties\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/silkroad2/src/main/resources/application.properties\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/silkroad2/src/main/resources/templates/index.html\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/silkroad2/src/main/resources/templates/index.html\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"CompilerWorkspaceConfiguration\">\r\n    <option name=\"MAKE_PROJECT_ON_SAVE\" value=\"true\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Interface\" />\r\n        <option value=\"Enum\" />\r\n        <option value=\"Class\" />\r\n        <option value=\"HTML File\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"HighlightingSettingsPerFile\">\r\n    <setting file=\"file://$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/Silkroad2Application.java\" root0=\"FORCE_HIGHLIGHTING\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProblemsViewState\">\r\n    <option name=\"selectedTabId\" value=\"QODANA_PROBLEMS_VIEW_TAB\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 8\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2fUxOsEcZvxJmhkMk51i6eTwLiR\" />\r\n  <component name=\"ProjectLevelVcsManager\">\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,\r\n    &quot;Application.Silkroad2Application.executor&quot;: &quot;Run&quot;,\r\n    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\r\n    &quot;ToolWindowRun.ShowToolbar&quot;: &quot;false&quot;,\r\n    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,\r\n    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,\r\n    &quot;last_opened_file_path&quot;: &quot;C:/Users/banno/Desktop/GestionBanque-master - Copie bennouri haider&quot;,\r\n    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,\r\n    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,\r\n    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;advanced.settings&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\silkroadproject\\silkroad2\\src\\main\\java\\com\\iset\\silkroad2\" />\r\n    </key>\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\silkroadproject\\silkroad2\\src\\main\\resources\\templates\" />\r\n      <recent name=\"C:\\silkroadproject\\silkroad2\\src\\main\\resources\\templates\\header,footer\" />\r\n      <recent name=\"C:\\silkroadproject\\silkroad2\\src\\main\\resources\" />\r\n      <recent name=\"C:\\silkroadproject\\silkroad2\\src\\main\\resources\\static\\imga\\css\\img\" />\r\n      <recent name=\"C:\\silkroadproject\\silkroad2\\src\\main\\resources\\static\\imga\\css\" />\r\n    </key>\r\n    <key name=\"CopyClassDialog.RECENTS_KEY\">\r\n      <recent name=\"com.iset.silkroad2.entity\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunAnythingCache\">\r\n    <option name=\"myCommands\">\r\n      <command value=\"jpaRepository\" />\r\n    </option>\r\n  </component>\r\n  <component name=\"RunManager\">\r\n    <configuration name=\"Silkroad2Application\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.iset.silkroad2.Silkroad2Application\" />\r\n      <module name=\"silkroad2\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"com.iset.silkroad2.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Application.Silkroad2Application\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"jdk-21.0.2-openjdk-21.0.2-4caba194b151-4f524021\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"789c1bed-682f-4a10-8e7d-d1e5f5440891\" name=\"Changes\" comment=\"\" />\r\n      <created>1713869428829</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1713869428829</updated>\r\n    </task>\r\n    <servers />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <option name=\"ADD_EXTERNAL_FILES_SILENTLY\" value=\"true\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 88d80cd4464e87fb9818aee07a617d90e45d2df8)
++++ b/.idea/workspace.xml	(date 1715864667232)
+@@ -4,27 +4,7 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="789c1bed-682f-4a10-8e7d-d1e5f5440891" name="Changes" comment="">
+-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/silkroad2/src/main/java/config/CorsConfig.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/css/footer.css" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/css/header.css" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/img/1.jpg" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/header,footer/header.html" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/question.html" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/frontend/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.vue" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/frontend/src/components/AddQuestion.vue" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/frontend/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/router/index.js" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/silkroad2/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/pom.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/controller/QuestionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/controller/QuestionController.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/controller/ReponseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/controller/ReponseController.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/repository/PersonneRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/repository/PersonneRepository.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/silkroad2/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/application.properties" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/index.html" afterDir="false" />
+-    </list>
++    <list default="true" id="789c1bed-682f-4a10-8e7d-d1e5f5440891" name="Changes" comment="" />
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -117,6 +97,7 @@
+     </configuration>
+     <recent_temporary>
+       <list>
++        <item itemvalue="Application.Silkroad2Application" />
+         <item itemvalue="Application.Silkroad2Application" />
+       </list>
+     </recent_temporary>
+@@ -138,8 +119,73 @@
+       <updated>1713869428829</updated>
+     </task>
+     <servers />
++  </component>
++  <component name="Vcs.Log.Tabs.Properties">
++    <option name="TAB_STATES">
++      <map>
++        <entry key="01a9caa4-22a0-49b9-b298-fea364e0e800">
++          <value>
++            <State>
++              <option name="FILTERS">
++                <map>
++                  <entry key="range">
++                    <value>
++                      <list>
++                        <option value="haidersprint1.1..master" />
++                      </list>
++                    </value>
++                  </entry>
++                  <entry key="roots">
++                    <value>
++                      <list>
++                        <option value="$PROJECT_DIR$" />
++                      </list>
++                    </value>
++                  </entry>
++                </map>
++              </option>
++            </State>
++          </value>
++        </entry>
++        <entry key="695444cd-c3ba-4262-a025-3c9722dc208f">
++          <value>
++            <State>
++              <option name="FILTERS">
++                <map>
++                  <entry key="range">
++                    <value>
++                      <list>
++                        <option value="haidersprint1.1..master" />
++                      </list>
++                    </value>
++                  </entry>
++                  <entry key="roots">
++                    <value>
++                      <list>
++                        <option value="$PROJECT_DIR$" />
++                      </list>
++                    </value>
++                  </entry>
++                </map>
++              </option>
++            </State>
++          </value>
++        </entry>
++      </map>
++    </option>
++    <option name="OPEN_GENERIC_TABS">
++      <map>
++        <entry key="01a9caa4-22a0-49b9-b298-fea364e0e800" value="TOOL_WINDOW" />
++        <entry key="695444cd-c3ba-4262-a025-3c9722dc208f" value="TOOL_WINDOW" />
++      </map>
++    </option>
+   </component>
+   <component name="VcsManagerConfiguration">
+     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+   </component>
++  <component name="com.intellij.coverage.CoverageDataManagerImpl">
++    <SUITE FILE_PATH="coverage/silkroadproject$Silkroad2Application.ic" NAME="Silkroad2Application Coverage Results" MODIFIED="1715259569421" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
++      <FILTER>com.iset.silkroad2.*</FILTER>
++    </SUITE>
++  </component>
+ </project>
+\ No newline at end of file

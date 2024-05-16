@@ -1,5 +1,6 @@
 package com.iset.silkroad2.controller;
 
+import ch.qos.logback.core.LayoutBase;
 import com.iset.silkroad2.entities.Personne;
 import com.iset.silkroad2.entities.Question;
 import com.iset.silkroad2.entities.Reponse;
@@ -13,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 
 import java.security.Principal;
@@ -47,6 +49,8 @@ public class ReponseController {
         Question question = questionrepository.findById(id);
 
         List<Reponse> reponse = question.getReponse();
+        List<Question> questions = questionrepository.findAll(); // Implement this method in your service
+        model.addAttribute("questions", questions);
 
         model.addAttribute("question", question);
         model.addAttribute("answers", reponse);
@@ -60,6 +64,8 @@ public class ReponseController {
 public String showEditResponseForm(@PathVariable Long id, Model model) {
     Reponse reponse = reponseRepository.findById(id);
     String questionTitre = reponse.getQuestion().getTitreq();
+    List<Question> questions = questionrepository.findAll(); // Implement this method in your service
+    model.addAttribute("questions", questions);
     model.addAttribute("reponse", reponse);
     model.addAttribute("questionTitre", questionTitre);
     return "reponse/edit_reponse";
@@ -69,20 +75,39 @@ public String showEditResponseForm(@PathVariable Long id, Model model) {
 
 
 
+//    @PostMapping("/{questionId}/addanswer")
+//    public ResponseEntity<Reponse> addAnswerToQuestion(@PathVariable Long questionId, @RequestBody Reponse reponse, Principal principal) {
+//        Optional<Question> optionalQuestion = Optional.ofNullable(questionrepository.findById(questionId));
+//        if (optionalQuestion.isPresent()) {
+//            Question question = optionalQuestion.get();
+//            String username =principal.getName();
+//            Personne personne=personnerepository.findByNom(username);
+//            reponse.setPersonne(personne);
+//            reponse.setQuestion(question);
+//            reponse.setCreatedat(new Date());
+//            Reponse savedAnswer = reponseRepository.save(reponse);
+//            return ResponseEntity.ok(savedAnswer);
+//        } else {
+//            return ResponseEntity.notFound().build();
+//        }
+//    }
+
     @PostMapping("/{questionId}/addanswer")
-    public ResponseEntity<Reponse> addAnswerToQuestion(@PathVariable Long questionId, @RequestBody Reponse reponse, Principal principal) {
+    public String addAnswerToQuestion(@PathVariable Long questionId, @ModelAttribute Reponse reponse) {
         Optional<Question> optionalQuestion = Optional.ofNullable(questionrepository.findById(questionId));
         if (optionalQuestion.isPresent()) {
             Question question = optionalQuestion.get();
-            String username =principal.getName();
-            Personne personne=personnerepository.findByNom(username);
-            reponse.setPersonne(personne);
+
+
             reponse.setQuestion(question);
             reponse.setCreatedat(new Date());
-            Reponse savedAnswer = reponseRepository.save(reponse);
-            return ResponseEntity.ok(savedAnswer);
+
+            reponseRepository.save(reponse);
+
+            return "redirect:/question/questions"; // Redirecting to the home page
         } else {
-            return ResponseEntity.notFound().build();
+            // Handle the case where the question is not found
+            return "error/404"; // Or redirect to an appropriate error page
         }
     }
 //9bal mane5dem el user
@@ -99,7 +124,7 @@ public String showEditResponseForm(@PathVariable Long id, Model model) {
             existingReponse.setCreatedat(new Date());
             Reponse savedAnswer = reponseRepository.save(existingReponse);
             // Redirect to the template
-            return "redirect:/question/index";
+            return "redirect:/question/questions";
         } else {
             // Handle not found case
             return "error";
@@ -111,7 +136,7 @@ public String showEditResponseForm(@PathVariable Long id, Model model) {
         Reponse existingResponse = reponseRepository.findById(id);
         existingResponse.setContenua(updatedResponse.getContenua());
         reponseRepository.save(existingResponse);
-        return "redirect:/question/index";
+        return "redirect:/question/questions";
     }
 
 

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <div th:replace="fragment/fragment :: myheader"></div>
+</head>
+<body>
+<!--header-->
+<header th:replace="fragment/fragment :: myheadera"></header>
+
+<main class="container mt-5">
+
+    <aside th:replace="fragment/fragment :: leftaside"></aside>
+    <section>
+
+        <h1>Matiere List</h1>
+            <ul th:each="matiere : ${matieres}">
+                <li th:text="${matiere.titrem}"></li>
+                <ul>
+                    <li th:each="chapitre : ${matiere.chapitres}">
+                        <span th:text="${chapitre.titre}"></span>
+                        <ul>
+                            <li th:each="cour : ${chapitre.cours}">
+                                <a th:href="@{/downloadFile/{id}(id=${cour.id})}" th:text="${cour.title}"></a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </ul>
+    </section>
+</main>
+<!--footer-->
+<footer th:replace="fragment/fragment :: footer"></footer>
+</body>
+</html>

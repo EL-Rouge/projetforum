@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Add Matiere with Chapitres and Cours</h1>
+
+<form th:action="@{/matieres/add}" th:object="${matiere}" method="post">
+  <label for="titrem">Titrem:</label>
+  <input type="text" id="titrem" th:field="*{titrem}" required><br><br>
+
+  <h2>Add Chapitres:</h2>
+  <div th:each="chapitre, chapitreStat : *{chapitres}">
+    <label for="chapitre" th:text="${'Chapitre ' + (chapitreStat.index + 1)}"></label><br>
+    <input type="text" th:id="${'chapitre' + chapitreStat.index}" th:field="*{chapitres[__${chapitreStat.index}__]}" required><br>
+
+    <h3>Add Cours:</h3>
+    <div th:each="cour, courStat : *{chapitres[__${chapitreStat.index}__].cours}">
+      <label for="cour" th:text="${'Cour ' + (courStat.index + 1)}"></label><br>
+      <input type="text" th:id="${'cour' + chapitreStat.index + '_' + courStat.index}" th:field="*{chapitres[__${chapitreStat.index}__].cours[__${courStat.index}__]}" required><br>
+    </div>
+
+    <button type="button" th:onclick="'#cour' + chapitreStat.index + '_0'.click()">Add Cour</button><br><br>
+  </div>
+
+  <button type="button" th:onclick="'#chapitre' + (${chapitres.size()} - 1) + '_0'.click()">Add Chapitre</button><br><br>
+
+  <button type="submit">Add Matiere</button>
+</form>
+</body>
+</html>

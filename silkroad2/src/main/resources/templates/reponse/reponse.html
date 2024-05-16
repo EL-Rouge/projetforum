@@ -105,35 +105,40 @@
 <!--        th:classappend="${#strings.contains(#request.getRequestURI(), 'error') ? ' error' : ''}"-->
         <div class="textarea2" >
           <h4 style="color:#FFDAB9">Your Answer:</h4>
-          <form th:action="@{/reponse/{questionId}/addansweronlycontent    (questionId=${question.id})}" method="post" th:object="${reponse}">
+          <form th:action="@{/reponse/{questionId}/addanswer(questionId=${question.id})}" method="post" th:object="${reponse}">
             <textarea id="reponse_area" th:field="*{contenua}"></textarea>
             <button type="submit" class="bn632-hover bn26">Save</button>
           </form>
         </div>
 
 
-        <a th:href="@{/home}"><button class="bn632-hover bn21">Cancel</button></a>
+        <a th:href="@{/question/questions}"><button class="bn632-hover bn21">Cancel</button></a>
       </div>
     </div>
 
-<!--    <div class="col-lg-4  bg-light">-->
+    <div class="col-lg-4  bg-light">
+      <div class="question-box">
+        <h3 style="color:#FFDAB9">Recent Questions</h3>
+        <div th:each="question, iterStat : ${questions}" th:if="${iterStat.index >= iterStat.size - 6}" class="mini-question">
+          <a th:href="@{/question/question/{id}/edit(id=${question.id})}" th:text="${question.titreq}"></a>
+        </div>
 
 
-<!--      <div class="question-box">-->
-<!--        <h3 style="color:#FFDAB9">Recent Questions</h3>-->
-<!--        {% for question1 in questions|reverse|slice(0, 5) %}-->
-<!--        <div class="mini-question">-->
 
-<!--          <a href="{{ path('app_qand_a', {'id': question1.id}) }}">{{ question1.title }}</a>-->
 
-<!--        </div>-->
-<!--        {% endfor %}-->
-<!--      </div>-->
-<!--      <br><br><br>-->
-<!--      <div>-->
-<!--        <p>Please exercise caution and attention when providing your answer to a question. It is crucial to follow the outlined steps meticulously to ensure accuracy and clarity in your response. Taking the time to understand the question thoroughly and adhering to the provided instructions will not only enhance the quality of your answer but also contribute to a more effective and meaningful exchange of information. Remember that thoughtful and well-considered responses can greatly benefit both the asker and others who may come across the question.</p>-->
-<!--      </div>-->
-<!--    </div>-->
+      </div>
+      <br><br><br>
+      <div>
+        <p>Total Questions: {{ totalQuestions }}</p>
+        <p>Total Users: {{ totalUsers }}</p>
+        <br><br>
+        <p>Our enterprise forum facilitates seamless collaboration, offering a centralized platform for team members to engage in open discussions and share valuable insights. This streamlined communication enhances teamwork and contributes to a more cohesive work environment</p>
+        <br>
+        <p>Acting as an efficient information hub, the forum enables swift exchange of updates and project details. This accessibility ensures that everyone stays well-informed, fostering a culture of transparency and agility within the organization.</p>
+        <br>
+        <p>A special thank you to each participant for making this forum a dynamic space. Your active involvement has contributed to creating a vibrant community that encourages innovation and knowledge sharing. Together, we continue to build a valuable resource for our collective success.</p>
+      </div>
+      </div>
   </div>
 </div>
 
