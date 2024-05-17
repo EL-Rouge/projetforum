@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <div th:replace="fragment/fragment :: myheader"></div>
+    <link type="text/css" href="/css/allmatiere.css" rel="stylesheet" />
+
 </head>
 <body>
 <!--header-->
@@ -15,23 +17,193 @@
     <aside th:replace="fragment/fragment :: leftaside"></aside>
     <section>
 
-        <h1>Matiere List</h1>
-            <ul th:each="matiere : ${matieres}">
-                <li th:text="${matiere.titrem}"></li>
+        <div th:each="matiere : ${matieres}">
+            <div class="matiere-box background" th:onclick="'toggleDetails(' + ${matiere.id} + ')'" th:text="${matiere.titrem}"></div>
+            <div class="chapitres-details" th:id="'details-' + ${matiere.id}">
                 <ul>
-                    <li th:each="chapitre : ${matiere.chapitres}">
-                        <span th:text="${chapitre.titre}"></span>
+                    <li th:each="chapitre, chapterStat : ${matiere.chapitres}">
+                    <span class="chapitre-box">
+                        Chapter <span th:text="${chapterStat.index + 1}"></span>: <span th:text="${chapitre.titre}"></span>
+                        <form th:action="@{/chapitres/delete/{chapitreId}(chapitreId=${chapitre.id})}" th:method="post">
+                            <!-- Hidden input field to specify the method -->
+                            <input type="hidden" name="_method" value="delete" />
+                            <!-- Other form fields or data -->
+                            <button type="submit" onclick="return confirm('Are you sure you want to delete this chapter?');">Delete</button>
+                        </form>
+                        <button th:onclick="'showAddTemplate(' + ${chapitre.id} + ')'" class="add-button">Ajouter</button>
+                        <div th:id="'add-template-' + ${chapitre.id}" style="display: none;">
+                            <button onclick="addCour(${chapitre.id})">Ajouter Cour</button>
+                            <button onclick="addTP(${chapitre.id})">Ajouter TP</button>
+                            <button onclick="addTD(${chapitre.id})">Ajouter TD</button>
+                        </div>
+                    </span>
                         <ul>
-                            <li th:each="cour : ${chapitre.cours}">
-                                <a th:href="@{/downloadFile/{id}(id=${cour.id})}" th:text="${cour.title}"></a>
+                            <li th:each="cour, courStat : ${chapitre.cours}">
+                                <a class="cour-box" th:href="@{/downloadFile/{id}(id=${cour.id})}">
+                                    Cour <span th:text="${courStat.index + 1}"></span>: <span th:text="${cour.title}"></span>
+                                </a>
                             </li>
                         </ul>
                     </li>
                 </ul>
-            </ul>
+                <button th:onclick="'showAddChapterForm(' + ${matiere.id} + ')'">Ajouter Chapitre</button>
+                <div th:id="'add-chapter-form-' + ${matiere.id}" style="display: none;">
+                    <form th:action="@{/chapitres/addChapter}" method="post">
+                        <input type="hidden" name="matiereId" th:value="${matiere.id}" />
+                        <input type="text" name="chapterTitle" placeholder="Titre du Chapitre" />
+                        <button type="submit">Ajouter</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+
+
     </section>
+
+
+    <aside>
+        <div  class="right-aside">
+            <div class="question-box">
+                <h3 style="color:#FFDAB9">Recent Questions</h3>
+                <div th:each="question, iterStat : ${questions}" th:if="${iterStat.index >= iterStat.size - 6}" class="mini-question">
+                    <a th:href="@{/question/question/{id}/edit(id=${question.id})}" th:text="${question.titreq}"></a>
+                </div>
+
+
+
+
+            </div>
+            <br><br><br>
+            <div>
+                <p>Total Questions: {{ totalQuestions }}</p>
+                <p>Total Users: {{ totalUsers }}</p>
+                <br><br>
+                <p>Our enterprise forum facilitates seamless collaboration, offering a centralized platform for team members to engage in open discussions and share valuable insights. This streamlined communication enhances teamwork and contributes to a more cohesive work environment</p>
+                <br>
+                <p>Acting as an efficient information hub, the forum enables swift exchange of updates and project details. This accessibility ensures that everyone stays well-informed, fostering a culture of transparency and agility within the organization.</p>
+                <br>
+                <p>A special thank you to each participant for making this forum a dynamic space. Your active involvement has contributed to creating a vibrant community that encourages innovation and knowledge sharing. Together, we continue to build a valuable resource for our collective success.</p>
+            </div>
+        </div>
+
+    </aside>
 </main>
 <!--footer-->
 <footer th:replace="fragment/fragment :: footer"></footer>
+
+
+
+<script>
+        function toggleDetails(id) {
+            var details = document.getElementById('details-' + id);
+            if (details.style.display === 'none' || details.style.display === '') {
+                details.style.display = 'block';
+            } else {
+                details.style.display = 'none';
+            }
+        }
+    </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const images = [
+        '../imgs/1.jpg',
+        '../imgs/2.jpg',
+        '../imgs/3.jpg',
+        '../imgs/5.jpg',
+        '../imgs/6.jpg',
+        '../imgs/7.jpg',
+        '../imgs/8.jpg',
+        '../imgs/9.jpg',
+        '../imgs/10.jpg',
+        // Add more image paths as needed
+    ];
+
+    const elements = document.querySelectorAll('.background');
+    const usedImages = new Set();
+
+    elements.forEach(element => {
+        let randomImage;
+        do {
+            randomImage = images[Math.floor(Math.random() * images.length)];
+        } while (usedImages.has(randomImage) && usedImages.size < images.length);
+
+        usedImages.add(randomImage);
+        element.style.backgroundImage = `url('${randomImage}')`;
+    });
+});
+    </script>
+
+<script>
+    function showAddChapterForm(matiereId) {
+        document.getElementById('add-chapter-form-' + matiereId).style.display = 'block';
+    }
+</script>
+
+<script>
+    function deleteChapter(chapitreId) {
+        if (confirm("Are you sure you want to delete this chapter?")) {
+            fetch('/chapitres/delete/' + chapitreId, {
+                method: 'DELETE'
+            }).then(response => {
+                if (response.ok) {
+                    // Reload the page or update the UI as needed
+                    location.reload();
+                } else {
+                    alert('Failed to delete chapter');
+                }
+            }).catch(error => {
+                console.error('Error deleting chapter:', error);
+                alert('Failed to delete chapter');
+            });
+        }
+    }
+</script>
+
+<script>
+    function showAddTemplate(chapitreId) {
+        var addTemplate = document.getElementById('add-template-' + chapitreId);
+        addTemplate.style.display = 'block';
+    }
+
+function addCour(chapitreId) {
+    var courTitle = prompt('Enter the title of the Cour:');
+    if (courTitle) {
+        var formData = new FormData();
+        formData.append('chapitreId', chapitreId);
+        formData.append('title', courTitle);
+
+        fetch('/cours/add', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (response.ok) {
+                console.log('Cour added successfully');
+                // Reload the page or update the UI as needed
+                location.reload();
+            } else {
+                console.error('Failed to add Cour');
+            }
+        })
+        .catch(error => {
+            console.error('Error adding Cour:', error);
+        });
+    }
+}
+
+
+    function addTP(chapitreId) {
+        // Implement adding TP logic here
+        console.log('Adding TP to Chapitre with ID ' + chapitreId);
+    }
+
+    function addTD(chapitreId) {
+        // Implement adding TD logic here
+        console.log('Adding TD to Chapitre with ID ' + chapitreId);
+    }
+</script>
 </body>
 </html>

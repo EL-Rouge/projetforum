@@ -23,7 +23,14 @@ public class CourController {
     @PostMapping("/add")
     public String addCour(@ModelAttribute("cour") Cour cour) {
         courRepository.save(cour);
-        return "redirect:/cours/add";
+        return "redirect:/matieres/matieres";
+    }
+
+    @DeleteMapping("/delete/{courid}")
+    public String deleteChapter(@PathVariable Long courid) {
+        courRepository.deleteById(courid);
+
+        return "redirect:/matieres/matieres";
     }
 
     // Add methods for updating and deleting Cours

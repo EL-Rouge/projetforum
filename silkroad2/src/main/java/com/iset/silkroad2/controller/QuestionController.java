@@ -63,7 +63,7 @@ public class QuestionController {
         @GetMapping("/all")
     public List<Question> getAllQuestions(){
         return questionRepository.findAll();
-    }
+   }
 
     @GetMapping("/index")
     public String showIndex(){
