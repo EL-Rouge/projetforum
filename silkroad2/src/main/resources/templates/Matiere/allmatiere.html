@@ -15,52 +15,98 @@
 <main class="container mt-5">
 
     <aside th:replace="fragment/fragment :: leftaside"></aside>
-    <section>
+        <section>
+            <!-- Form to add a new Matiere -->
+            <div>
+                <form th:action="@{/matieres/add}" method="post">
+                    <input type="text" name="titrem" placeholder="Titre de la Matiere" required />
+                    <button type="submit">Ajouter Matiere</button>
+                </form>
+            </div>
 
-        <div th:each="matiere : ${matieres}">
-            <div class="matiere-box background" th:onclick="'toggleDetails(' + ${matiere.id} + ')'" th:text="${matiere.titrem}"></div>
-            <div class="chapitres-details" th:id="'details-' + ${matiere.id}">
-                <ul>
-                    <li th:each="chapitre, chapterStat : ${matiere.chapitres}">
+            <!-- Existing code to display matieres and their details -->
+
+                <!-- Existing code for Matieres -->
+                <div th:each="matiere : ${matieres}">
+                    <div class="matiere-box background" th:onclick="'toggleDetails(' + ${matiere.id} + ')'" th:text="${matiere.titrem}"></div>
+                    <!-- Delete Matiere -->
+                    <form th:action="@{/matieres/delete/{matiereId}(matiereId=${matiere.id})}" th:method="post">
+                        <input type="hidden" name="_method" value="delete" />
+                        <button type="submit" onclick="return confirm('Are you sure you want to delete this matiere and all its chapters?');">Delete Matiere</button>
+                    </form>
+
+                    <div class="chapitres-details" th:id="'details-' + ${matiere.id}">
+                        <ul>
+                            <li th:each="chapitre, chapterStat : ${matiere.chapitres}">
                     <span class="chapitre-box">
                         Chapter <span th:text="${chapterStat.index + 1}"></span>: <span th:text="${chapitre.titre}"></span>
+                        <!-- Delete Chapitre -->
                         <form th:action="@{/chapitres/delete/{chapitreId}(chapitreId=${chapitre.id})}" th:method="post">
-                            <!-- Hidden input field to specify the method -->
                             <input type="hidden" name="_method" value="delete" />
-                            <!-- Other form fields or data -->
-                            <button type="submit" onclick="return confirm('Are you sure you want to delete this chapter?');">Delete</button>
+                            <button type="submit" onclick="return confirm('Are you sure you want to delete this chapitre?');">Delete</button>
                         </form>
-                        <button th:onclick="'showAddTemplate(' + ${chapitre.id} + ')'" class="add-button">Ajouter</button>
-                        <div th:id="'add-template-' + ${chapitre.id}" style="display: none;">
-                            <button onclick="addCour(${chapitre.id})">Ajouter Cour</button>
-                            <button onclick="addTP(${chapitre.id})">Ajouter TP</button>
-                            <button onclick="addTD(${chapitre.id})">Ajouter TD</button>
-                        </div>
                     </span>
-                        <ul>
-                            <li th:each="cour, courStat : ${chapitre.cours}">
-                                <a class="cour-box" th:href="@{/downloadFile/{id}(id=${cour.id})}">
-                                    Cour <span th:text="${courStat.index + 1}"></span>: <span th:text="${cour.title}"></span>
-                                </a>
+                                <ul>
+                                    <!-- Existing code for displaying Cours -->
+                                    <li th:each="cour, courStat : ${chapitre.cours}">
+                                        <a class="cour-box" th:href="@{${cour.filePath}}" download>
+                                            Cour <span th:text="${courStat.index + 1}"></span>: <span th:text="${cour.title}"></span>
+                                        </a>
+                                        <form th:action="@{/cours/delete/{courid}(courid=${cour.id})}" th:method="post">
+                                            <input type="hidden" name="_method" value="delete" />
+                                            <button type="submit" onclick="return confirm('Are you sure you want to delete this cour?');">Delete</button>
+                                        </form>
+                                    </li>
+                                    <!-- Add Cour to Chapitre -->
+                                    <li>
+                                        <button th:onclick="'showAddCourForm(' + ${chapitre.id} + ')'">Ajouter Cour</button>
+                                        <div th:id="'add-cour-form-' + ${chapitre.id}" style="display: none;">
+                                            <form th:action="@{/cours/add}" method="post" enctype="multipart/form-data">
+                                                <input type="hidden" name="chapitreId" th:value="${chapitre.id}" />
+                                                <input type="text" name="courTitle" placeholder="Titre du Cour" />
+                                                <input type="file" name="file" />
+                                                <button type="submit">Ajouter</button>
+                                            </form>
+                                        </div>
+                                    </li>
+                                    <!-- Add TP to Chapitre -->
+                                    <li>
+                                        <button th:onclick="'showAddTpForm(' + ${chapitre.id} + ')'">Ajouter TP</button>
+                                        <div th:id="'add-tp-form-' + ${chapitre.id}" style="display: none;">
+                                            <form th:action="@{/tp/add}" method="post">
+                                                <input type="hidden" name="chapitreId" th:value="${chapitre.id}" />
+                                                <input type="text" name="tpTitle" placeholder="Titre du TP" />
+                                                <button type="submit">Ajouter</button>
+                                            </form>
+                                        </div>
+                                    </li>
+                                    <!-- Add TD to Chapitre -->
+                                    <li>
+                                        <button th:onclick="'showAddTdForm(' + ${chapitre.id} + ')'">Ajouter TD</button>
+                                        <div th:id="'add-td-form-' + ${chapitre.id}" style="display: none;">
+                                            <form th:action="@{/td/add}" method="post">
+                                                <input type="hidden" name="chapitreId" th:value="${chapitre.id}" />
+                                                <input type="text" name="tdTitle" placeholder="Titre du TD" />
+                                                <button type="submit">Ajouter</button>
+                                            </form>
+                                        </div>
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
-                    </li>
-                </ul>
-                <button th:onclick="'showAddChapterForm(' + ${matiere.id} + ')'">Ajouter Chapitre</button>
-                <div th:id="'add-chapter-form-' + ${matiere.id}" style="display: none;">
-                    <form th:action="@{/chapitres/addChapter}" method="post">
-                        <input type="hidden" name="matiereId" th:value="${matiere.id}" />
-                        <input type="text" name="chapterTitle" placeholder="Titre du Chapitre" />
-                        <button type="submit">Ajouter</button>
-                    </form>
+                        <button th:onclick="'showAddChapterForm(' + ${matiere.id} + ')'">Ajouter Chapitre</button>
+                        <div th:id="'add-chapter-form-' + ${matiere.id}" style="display: none;">
+                            <form th:action="@{/chapitres/addChapter}" method="post">
+                                <input type="hidden" name="matiereId" th:value="${matiere.id}" />
+                                <input type="text" name="chapterTitle" placeholder="Titre du Chapitre" />
+                                <button type="submit">Ajouter</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
 
 
-
-
-    </section>
+        </section>
 
 
     <aside>
@@ -109,8 +155,8 @@
 <script>
 document.addEventListener('DOMContentLoaded', () => {
     const images = [
-        '../imgs/1.jpg',
-        '../imgs/2.jpg',
+
+
         '../imgs/3.jpg',
         '../imgs/5.jpg',
         '../imgs/6.jpg',
@@ -143,67 +189,39 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 <script>
-    function deleteChapter(chapitreId) {
-        if (confirm("Are you sure you want to delete this chapter?")) {
-            fetch('/chapitres/delete/' + chapitreId, {
-                method: 'DELETE'
-            }).then(response => {
-                if (response.ok) {
-                    // Reload the page or update the UI as needed
-                    location.reload();
-                } else {
-                    alert('Failed to delete chapter');
-                }
-            }).catch(error => {
-                console.error('Error deleting chapter:', error);
-                alert('Failed to delete chapter');
-            });
-        }
+ function showAddTdForm(chapitreId) {
+    var formId = 'add-td-form-' + chapitreId;
+    var form = document.getElementById(formId);
+    if (form.style.display === 'none') {
+        form.style.display = 'block';
+    } else {
+        form.style.display = 'none';
     }
-</script>
+}
 
-<script>
-    function showAddTemplate(chapitreId) {
-        var addTemplate = document.getElementById('add-template-' + chapitreId);
-        addTemplate.style.display = 'block';
+function showAddTpForm(chapitreId) {
+    var formId = 'add-tp-form-' + chapitreId;
+    var form = document.getElementById(formId);
+    if (form.style.display === 'none') {
+        form.style.display = 'block';
+    } else {
+        form.style.display = 'none';
     }
+}
 
-function addCour(chapitreId) {
-    var courTitle = prompt('Enter the title of the Cour:');
-    if (courTitle) {
-        var formData = new FormData();
-        formData.append('chapitreId', chapitreId);
-        formData.append('title', courTitle);
-
-        fetch('/cours/add', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => {
-            if (response.ok) {
-                console.log('Cour added successfully');
-                // Reload the page or update the UI as needed
-                location.reload();
-            } else {
-                console.error('Failed to add Cour');
-            }
-        })
-        .catch(error => {
-            console.error('Error adding Cour:', error);
-        });
+function showAddCourForm(chapitreId) {
+    var formId = 'add-cour-form-' + chapitreId;
+    var form = document.getElementById(formId);
+    if (form.style.display === 'none') {
+        form.style.display = 'block';
+    } else {
+        form.style.display = 'none';
     }
 }
 
 
-    function addTP(chapitreId) {
-        // Implement adding TP logic here
-        console.log('Adding TP to Chapitre with ID ' + chapitreId);
-    }
-
-    function addTD(chapitreId) {
-        // Implement adding TD logic here
-        console.log('Adding TD to Chapitre with ID ' + chapitreId);
-    }
 </script>
+
+
 </body>
 </html>

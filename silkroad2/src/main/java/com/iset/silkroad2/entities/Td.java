@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Cour {
+public class Td {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +23,4 @@ public class Cour {
     @ManyToOne
     @JoinColumn(name = "chapitre_id")
     private Chapitre chapitre;
-
-    public void setChapitreId(Long chapitreId) {
-    }
 }

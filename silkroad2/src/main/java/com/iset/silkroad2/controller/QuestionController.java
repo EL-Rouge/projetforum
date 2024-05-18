@@ -33,9 +33,9 @@ public class QuestionController {
     QuestionRepository questionRepository;
 
     @Autowired
-    ReponseRepository  reponseRepository; // Corrected the variable name
+    ReponseRepository  reponseRepository;
     @Autowired
-    PersonneRepository personneRepository; // Corrected the variable name
+    PersonneRepository personneRepository;
 
     @GetMapping("/ask")
     public String showAskQuestionForm(Model model, @RequestParam(name = "tag", required = false, defaultValue = "Restorant") Tags tag) {
@@ -94,16 +94,6 @@ public class QuestionController {
     }
 
 
-
-
-
-
-
-
-
-
-
-
     @GetMapping("/{id}")
     public Question getQuestionById(@PathVariable Long id) {
         return questionRepository.findById(id);
@@ -140,10 +130,10 @@ public class QuestionController {
             reponseRepository.deleteAll(responses);
             // Delete the question
             questionRepository.deleteById(id);
-            return "redirect:/question/questions"; // Redirect to home after successful deletion
+            return "redirect:/question/questions";
         } else {
             model.addAttribute("error", "Question not found");
-            return "error/404"; // Or another appropriate error page
+            return "error/404";
         }
     }
 
@@ -154,9 +144,9 @@ public class QuestionController {
             question1.setTitreq(question.getTitreq());
             question1.setContenuq(question.getContenuq());
             questionRepository.save(question1);
-            return "redirect:/question/index";
+            return "redirect:/question/questions";
         } else {
-            // Handle the case where the question with the given ID is not found
+
             return "redirect:/error";
         }
     }
@@ -181,14 +171,14 @@ public class QuestionController {
     public String searchByTitle(@RequestParam String titreq, Model model) {
         List<Question> questions = questionRepository.findByTitreqContaining(titreq);
         model.addAttribute("questions", questions);
-        return "home/home"; // Assuming this is the name of your Thymeleaf template
+        return "home/home";
     }
 
 
 
     @GetMapping("/questions")
     public String list(Model model) {
-        List<Question> questions = questionRepository.findAll(); // Implement this method in your service
+        List<Question> questions = questionRepository.findAll();
         model.addAttribute("questions", questions);
         return "home/home";
     }

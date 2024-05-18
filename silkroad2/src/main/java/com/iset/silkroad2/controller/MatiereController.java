@@ -44,46 +44,26 @@ public class MatiereController {
     }
 
     @PostMapping("/add")
-    public String addMatiere(@ModelAttribute("matiere") Matiere matiere) {
-        matiereRepository.save(matiere);
-        return "redirect:/matieres/add";
+    public String addMatiere(@RequestParam("titrem") String titrem) {
+        Matiere newMatiere = new Matiere();
+        newMatiere.setTitrem(titrem);
+        matiereRepository.save(newMatiere);
+        return "redirect:/matieres/matieres"; // Redirect to the page showing the list of matieres
     }
 
-    @GetMapping("/{matiereId}/chapitres/add")
-    public String showAddChapitreForm(@PathVariable Long matiereId, Model model) {
-        Matiere matiere = matiereRepository.findById(matiereId)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid Matiere Id:" + matiereId));
-        model.addAttribute("chapitre", new Chapitre());
-        model.addAttribute("matiere", matiere);
-        return "add-chapitre";
+    @DeleteMapping("/delete/{matiereId}")
+    public String deleteMatiere(@PathVariable Long matiereId) {
+        matiereRepository.deleteById(matiereId);
+        return "redirect:/matieres/matieres";
     }
 
-    @PostMapping("/{matiereId}/chapitres/add")
-    public String addChapitre(@PathVariable Long matiereId, @ModelAttribute("chapitre") Chapitre chapitre) {
-        Matiere matiere = matiereRepository.findById(matiereId)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid Matiere Id:" + matiereId));
-        chapitre.setMatiere(matiere);
-        chapitreRepository.save(chapitre);
-        return "redirect:/matieres/" + matiereId + "/chapitres/add";
+    @DeleteMapping("/chapitres/delete/{chapitreId}")
+    public String deleteChapitre(@PathVariable Long chapitreId) {
+        chapitreRepository.deleteById(chapitreId);
+        return "redirect:/matieres/matieres";
     }
 
-    @GetMapping("/{matiereId}/chapitres/{chapitreId}/cours/add")
-    public String showAddCourForm(@PathVariable Long matiereId, @PathVariable Long chapitreId, Model model) {
-        Chapitre chapitre = chapitreRepository.findById(chapitreId)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid Chapitre Id:" + chapitreId));
-        model.addAttribute("cour", new Cour());
-        model.addAttribute("chapitre", chapitre);
-        return "add-cour";
-    }
 
-    @PostMapping("/{matiereId}/chapitres/{chapitreId}/cours/add")
-    public String addCour(@PathVariable Long matiereId, @PathVariable Long chapitreId, @ModelAttribute("cour") Cour cour) {
-        Chapitre chapitre = chapitreRepository.findById(chapitreId)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid Chapitre Id:" + chapitreId));
-        cour.setChapitre(chapitre);
-        courRepository.save(cour);
-        return "redirect:/matieres/" + matiereId + "/chapitres/" + chapitreId + "/cours/add";
-    }
 
     // Add similar methods for updating and deleting Chapitres and Cours
 }

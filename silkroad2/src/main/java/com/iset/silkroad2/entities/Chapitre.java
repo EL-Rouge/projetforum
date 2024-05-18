@@ -27,5 +27,21 @@ public class Chapitre implements Serializable {
     @OneToMany(mappedBy = "chapitre", cascade = CascadeType.ALL)
     private List<Cour> cours ;
 
+    @OneToMany(mappedBy = "chapitre", cascade = CascadeType.ALL)
+    private List<Tp> tps ;
+
+    @OneToMany(mappedBy = "chapitre", cascade = CascadeType.ALL)
+    private List<Td> tds ;
+
+    public void addTd(Td td) {
+    }
+
+    public void addTp(Tp tp) {
+    }
+
+    public void addCour(Cour cour) {
+    }
+
+
     // Constructors, getters, and setters
 }

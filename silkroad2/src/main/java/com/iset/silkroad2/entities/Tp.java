@@ -1,5 +1,8 @@
 package com.iset.silkroad2.entities;
 
+import jakarta.persistence.*;
+
+
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -10,8 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Cour {
-
+public class Tp {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,6 +26,4 @@ public class Cour {
     @JoinColumn(name = "chapitre_id")
     private Chapitre chapitre;
 
-    public void setChapitreId(Long chapitreId) {
-    }
 }

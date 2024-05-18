@@ -37,7 +37,7 @@ public class ChapitreController {
         newChapter.setTitre(chapterTitle);
         newChapter.setMatiere(matiere);
         chapitreRepository.save(newChapter);
-        return "redirect:/matieres/matieres"; // Redirect to the view displaying the matieres and chapters
+        return "redirect:/matieres/matieres";
     }
 
     @DeleteMapping("/delete/{chapitreId}")
@@ -46,5 +46,5 @@ public class ChapitreController {
 
         return "redirect:/matieres/matieres";
     }
-    // Add methods for updating and deleting Chapitres
+
 }

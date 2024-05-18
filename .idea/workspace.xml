@@ -5,20 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="789c1bed-682f-4a10-8e7d-d1e5f5440891" name="Changes" comment="i did the header and the footer('who can fix the header and the footer so i can call them in the other file &lt;th:fragment and th:replace won't work &gt;')&#10;and i did the page add question,delete question ,edit question&#10;add answer,delete answer ,adit answer">
-      <change afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/static/css/allmatiere.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/static/imgs/10.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/static/imgs/2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/static/imgs/3.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/static/imgs/5.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/static/imgs/6.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/static/imgs/7.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/static/imgs/8.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/static/imgs/9.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/controller/ContentController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/controller/TdController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/controller/TpController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/entities/Td.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/entities/Tp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/repository/TdRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/repository/TpRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/uploads/OIP.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/uploads/cv haider bannouri.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/uploads/images.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/upload/cv haider bannouri.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/controller/ChapitreController.java" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/controller/ChapitreController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/controller/CourController.java" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/controller/CourController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/controller/MatiereController.java" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/controller/MatiereController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/controller/QuestionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/controller/QuestionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/controller/ReponseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/controller/ReponseController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/entities/Chapitre.java" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/entities/Chapitre.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/entities/Cour.java" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/java/com/iset/silkroad2/entities/Cour.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/silkroad2/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/Matiere/allmatiere.html" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/Matiere/allmatiere.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/Question/edit_question.html" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/Question/edit_question.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/Question/question.html" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/Question/question.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/fragment/fragment.html" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/fragment/fragment.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/reponse/edit_reponse.html" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/reponse/edit_reponse.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/reponse/reponse.html" beforeDir="false" afterPath="$PROJECT_DIR$/silkroad2/src/main/resources/templates/reponse/reponse.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,8 +47,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
         <option value="HTML File" />
       </list>
     </option>
@@ -44,15 +56,15 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="haidersprint1.1auth" />
+        <entry key="$PROJECT_DIR$" value="haidersprint1" />
       </map>
     </option>
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;
   }
-}]]></component>
+}</component>
   <component name="GithubPullRequestsUISettings">
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>

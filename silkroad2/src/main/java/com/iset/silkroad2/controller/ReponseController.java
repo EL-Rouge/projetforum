@@ -38,11 +38,7 @@ public class ReponseController {
         return reponseRepository.findAll();
     }
 
-//    @GetMapping("/{id}")
-//    public Reponse getreponsebyid(@PathVariable long id){
-//
-//        return reponseRepository.findById(id);
-//    }
+
 
     @GetMapping("/{id}")
     public String getQuestionById(@PathVariable Long id, Model model) {
@@ -64,7 +60,7 @@ public class ReponseController {
 public String showEditResponseForm(@PathVariable Long id, Model model) {
     Reponse reponse = reponseRepository.findById(id);
     String questionTitre = reponse.getQuestion().getTitreq();
-    List<Question> questions = questionrepository.findAll(); // Implement this method in your service
+    List<Question> questions = questionrepository.findAll();
     model.addAttribute("questions", questions);
     model.addAttribute("reponse", reponse);
     model.addAttribute("questionTitre", questionTitre);
@@ -104,10 +100,10 @@ public String showEditResponseForm(@PathVariable Long id, Model model) {
 
             reponseRepository.save(reponse);
 
-            return "redirect:/question/questions"; // Redirecting to the home page
+            return "redirect:/question/questions";
         } else {
-            // Handle the case where the question is not found
-            return "error/404"; // Or redirect to an appropriate error page
+
+            return "error/404";
         }
     }
 //9bal mane5dem el user
@@ -123,10 +119,8 @@ public String showEditResponseForm(@PathVariable Long id, Model model) {
             existingReponse.setContenua(reponse.getContenua());
             existingReponse.setCreatedat(new Date());
             Reponse savedAnswer = reponseRepository.save(existingReponse);
-            // Redirect to the template
             return "redirect:/question/questions";
         } else {
-            // Handle not found case
             return "error";
         }
 }
@@ -138,15 +132,6 @@ public String showEditResponseForm(@PathVariable Long id, Model model) {
         reponseRepository.save(existingResponse);
         return "redirect:/question/questions";
     }
-
-
-
-
-
-//
-
-
-
 
     @PostMapping("/add")
     public Reponse addreponse(@RequestBody Reponse reponse){
